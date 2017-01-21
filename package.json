@@ -1,0 +1,22 @@
+{
+  "name": "marker-challenge",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "webpack -p --config tools/webpack.config.js",
+    "test": "eslint -c tools/.eslintrc.js components/**/*.jsx"
+  },
+  "devDependencies": {
+    "2gis-maps": "2.2.6",
+    "2gis-maps-react": "0.0.3",
+    "babel-core": "6.22.1",
+    "babel-loader": "6.2.10",
+    "babel-preset-env": "1.1.8",
+    "babel-preset-react": "6.22.0",
+    "eslint": "3.14.0",
+    "eslint-plugin-react": "6.9.0",
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "webpack": "2.2.0"
+  }
+}
