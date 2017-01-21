@@ -3,7 +3,7 @@ import React from 'react';
 const MAX_HISTORY_COUNT = 6;
 
 function request(query) {
-    const url = 'http://catalog.api.2gis.ru/2.0/catalog/marker/search?page_size=15000&region_id=32&key=ruhebf8058&q=';
+    const url = 'https://catalog.api.2gis.ru/2.0/catalog/marker/search?page_size=15000&region_id=32&key=ruhebf8058&q=';
 
     return fetch(url + query).then(response => {
         if (!response.ok) {
