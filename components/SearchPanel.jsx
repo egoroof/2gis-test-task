@@ -3,7 +3,7 @@ import React from 'react';
 function request(query) {
     const url = 'https://catalog.api.2gis.ru/2.0/catalog/marker/search?page_size=15000&region_id=32&key=ruhebf8058&q=';
 
-    return fetch(url + query).then(response => {
+    return fetch(url + encodeURIComponent(query)).then(response => {
         if (!response.ok) {
             throw new Error(`${response.status} (${response.statusText})`);
         }
