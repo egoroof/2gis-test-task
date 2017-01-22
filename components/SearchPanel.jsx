@@ -1,7 +1,5 @@
 import React from 'react';
 
-const MAX_HISTORY_COUNT = 6;
-
 function request(query) {
     const url = 'https://catalog.api.2gis.ru/2.0/catalog/marker/search?page_size=15000&region_id=32&key=ruhebf8058&q=';
 
@@ -24,7 +22,8 @@ function request(query) {
 export default class SearchPanel extends React.Component {
     static get propTypes() {
         return {
-            onNewQuery: React.PropTypes.func.isRequired
+            onNewQuery: React.PropTypes.func.isRequired,
+            maxHistoryCount: React.PropTypes.number.isRequired
         };
     }
 
@@ -63,7 +62,7 @@ export default class SearchPanel extends React.Component {
         request(query).then(markers => {
             this.props.onNewQuery(markers);
             this.setState((prevState) => {
-                if (prevState.queries.length > MAX_HISTORY_COUNT - 1) {
+                if (prevState.queries.length >= this.props.maxHistoryCount) {
                     prevState.queries.shift();
                 }
                 prevState.queries.push({

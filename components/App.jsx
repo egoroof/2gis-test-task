@@ -23,6 +23,7 @@ class App extends React.Component {
         return <div>
             <SearchPanel
                 onNewQuery={this.handleNewQuery}
+                maxHistoryCount={6}
             />
             <MarkerMap
                 center={this.state.center}
