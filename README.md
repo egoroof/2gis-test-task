@@ -6,15 +6,15 @@ The job: https://novosibirsk.hh.ru/vacancy/19466627
 
 When you add markers to map they can run into each other:
 
-![collapse](tools/readme_assets/1.png)
+![collapsed markers](tools/readme_assets/1.png)
 
 You need to hide extra markers then they could be placed without collapse:
 
-![collapse](tools/readme_assets/2.png)
+![hidden markers](tools/readme_assets/2.png)
 
 But if you zoom in and it will be enough place for extra markers they should be shown:
 
-![collapse](tools/readme_assets/3.png)
+![extra markers](tools/readme_assets/3.png)
 
 ## How to build
 
