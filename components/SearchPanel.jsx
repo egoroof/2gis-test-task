@@ -30,32 +30,35 @@ export default class SearchPanel extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            disabled: false,
+            query: '',
             queries: []
         };
         this.handleClick = this.handleClick.bind(this);
+        this.handleQueryChange = this.handleQueryChange.bind(this);
     }
 
-    disableForm() {
-        this.queryInput.disabled = 'disabled';
-        this.queryBtn.disabled = 'disabled';
-    }
-
-    enableForm() {
-        this.queryInput.removeAttribute('disabled');
-        this.queryBtn.removeAttribute('disabled');
+    handleQueryChange(e) {
+        this.setState({
+            query: e.target.value
+        });
     }
 
     handleClick(e) {
         e.preventDefault();
-        this.disableForm();
-        let query = this.queryInput.value;
-        this.queryInput.value = '';
+        this.setState({
+            disabled: true,
+            query: ''
+        });
+        let query = this.state.query;
         if (e.target.nodeName === 'A') {
             const id = parseInt(e.target.getAttribute('data-id'), 10);
             query = this.state.queries[id].text;
         }
         if (!query) {
-            this.enableForm();
+            this.setState({
+                disabled: false
+            });
             return;
         }
         this.props.onNewQuery([]);
@@ -70,10 +73,10 @@ export default class SearchPanel extends React.Component {
                     resultCount: markers.length
                 });
                 return {
+                    disabled: false,
                     queries: prevState.queries
                 };
             });
-            this.enableForm();
         });
     }
 
@@ -87,12 +90,15 @@ export default class SearchPanel extends React.Component {
                 <input type="text"
                        className="form-control w-75"
                        placeholder="Введите поисковой запрос"
-                       ref={(a) => this.queryInput = a}
+                       disabled={this.state.disabled}
+                       value={this.state.query}
+                       onChange={this.handleQueryChange}
                 />
                 <button type="button"
                         onClick={this.handleClick}
-                        ref={(a) => this.queryBtn = a}
-                        className="btn btn-primary btn-sm">
+                        disabled={this.state.disabled}
+                        className="btn btn-primary btn-sm"
+                >
                     <i className="icon"/>
                 </button>
             </form>
@@ -102,7 +108,8 @@ export default class SearchPanel extends React.Component {
                        href={`#${query.text}`}
                        onClick={this.handleClick}
                        data-id={i}
-                       className={(i === this.state.queries.length - 1 ? 'active ' : '') + listClasses}>
+                       className={(i === this.state.queries.length - 1 ? 'active ' : '') + listClasses}
+                    >
                         {query.text}
                         <span className="badge badge-default">{query.resultCount}</span>
                     </a>
