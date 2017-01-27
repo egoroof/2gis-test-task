@@ -4,7 +4,7 @@ The job: https://novosibirsk.hh.ru/vacancy/19466627
 
 ## The problem
 
-When you add markers on map they can run into each other:
+When you add markers to map they can run into each other:
 
 ![collapse](tools/readme_assets/1.png)
 
