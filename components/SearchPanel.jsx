@@ -34,6 +34,7 @@ export default class SearchPanel extends React.Component {
             query: '',
             queries: []
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleQueryChange = this.handleQueryChange.bind(this);
     }
@@ -44,23 +45,18 @@ export default class SearchPanel extends React.Component {
         });
     }
 
-    handleClick(e) {
-        e.preventDefault();
+    handleSubmit(e) {
+        if (e) {
+            e.preventDefault();
+        }
+        const query = this.state.query;
+        if (!query) {
+            return;
+        }
         this.setState({
             disabled: true,
             query: ''
         });
-        let query = this.state.query;
-        if (e.target.nodeName === 'A') {
-            const id = parseInt(e.target.getAttribute('data-id'), 10);
-            query = this.state.queries[id].text;
-        }
-        if (!query) {
-            this.setState({
-                disabled: false
-            });
-            return;
-        }
         this.props.onNewQuery([]);
         request(query).then(markers => {
             this.props.onNewQuery(markers);
@@ -80,11 +76,22 @@ export default class SearchPanel extends React.Component {
         });
     }
 
+    handleClick(e) {
+        e.preventDefault();
+        const id = parseInt(e.target.getAttribute('data-id'), 10);
+        const query = this.state.queries[id].text;
+        this.setState({
+            query: query
+        }, () => {
+            this.handleSubmit();
+        });
+    }
+
     render() {
         const listClasses = 'list-group-item list-group-item-action justify-content-between';
         return <div className="search-panel">
             <form
-                onSubmit={this.handleClick}
+                onSubmit={this.handleSubmit}
                 className="form-inline justify-content-between mb-2"
             >
                 <input type="text"
@@ -95,7 +102,7 @@ export default class SearchPanel extends React.Component {
                        onChange={this.handleQueryChange}
                 />
                 <button type="button"
-                        onClick={this.handleClick}
+                        onClick={this.handleSubmit}
                         disabled={this.state.disabled}
                         className="btn btn-primary btn-sm"
                 >
