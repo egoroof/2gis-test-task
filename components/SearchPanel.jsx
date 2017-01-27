@@ -78,6 +78,9 @@ export default class SearchPanel extends React.Component {
 
     handleClick(e) {
         e.preventDefault();
+        if (this.state.disabled) {
+            return;
+        }
         const id = parseInt(e.target.getAttribute('data-id'), 10);
         const query = this.state.queries[id].text;
         this.setState({
@@ -88,7 +91,10 @@ export default class SearchPanel extends React.Component {
     }
 
     render() {
-        const listClasses = 'list-group-item list-group-item-action justify-content-between';
+        let listClasses = 'list-group-item list-group-item-action justify-content-between';
+        if (this.state.disabled) {
+            listClasses += ' disabled';
+        }
         return <div className="search-panel">
             <form
                 onSubmit={this.handleSubmit}
