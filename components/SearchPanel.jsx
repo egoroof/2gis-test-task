@@ -20,32 +20,24 @@ function request(query) {
 }
 
 export default class SearchPanel extends React.Component {
-    static get propTypes() {
-        return {
-            onNewQuery: React.PropTypes.func.isRequired,
-            maxHistoryCount: React.PropTypes.number.isRequired
-        };
-    }
+    static propTypes = {
+        onNewQuery: React.PropTypes.func.isRequired,
+        maxHistoryCount: React.PropTypes.number.isRequired
+    };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            disabled: false,
-            query: '',
-            queries: []
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleQueryChange = this.handleQueryChange.bind(this);
-    }
+    state = {
+        disabled: false,
+        query: '',
+        queries: []
+    };
 
-    handleQueryChange(e) {
+    handleQueryChange = e => {
         this.setState({
             query: e.target.value
         });
-    }
+    };
 
-    handleSubmit(e) {
+    handleSubmit = e => {
         if (e) {
             e.preventDefault();
         }
@@ -74,9 +66,9 @@ export default class SearchPanel extends React.Component {
                 };
             });
         });
-    }
+    };
 
-    handleClick(e) {
+    handleClick = e => {
         e.preventDefault();
         if (this.state.disabled) {
             return;
@@ -88,7 +80,7 @@ export default class SearchPanel extends React.Component {
         }, () => {
             this.handleSubmit();
         });
-    }
+    };
 
     render() {
         let listClasses = 'list-group-item list-group-item-action justify-content-between';

@@ -19,40 +19,34 @@ function rearrange(markers, zoom, viewBounds) {
                 break; // point inside other point area
             }
         }
-        if (positionIsFree) {
-            rearranged.push({
-                id: markers[i].id,
-                latlng: markerPosition,
-                bounds: DG.latLngBounds([[
-                    markers[i].lat - k, markers[i].lon - k
-                ], [
-                    markers[i].lat + k, markers[i].lon + k
-                ]])
-            });
+        if (!positionIsFree) {
+            continue;
         }
+        rearranged.push({
+            id: markers[i].id,
+            latlng: markerPosition,
+            bounds: DG.latLngBounds([[
+                markers[i].lat - k, markers[i].lon - k
+            ], [
+                markers[i].lat + k, markers[i].lon + k
+            ]])
+        });
     }
     return rearranged;
 }
 
 export default class MarkerMap extends React.Component {
-    static get propTypes() {
-        return {
-            markers: React.PropTypes.array.isRequired,
-            center: React.PropTypes.array.isRequired,
-            zoom: React.PropTypes.number.isRequired,
-        };
-    }
+    static propTypes = {
+        markers: React.PropTypes.array.isRequired,
+        center: React.PropTypes.array.isRequired,
+        zoom: React.PropTypes.number.isRequired
+    };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            width: document.body.clientWidth,
-            height: document.body.clientHeight,
-            markers: [] // currently showing markers only
-        };
-        this.handleZoomStart = this.handleZoomStart.bind(this);
-        this.handleMoveEnd = this.handleMoveEnd.bind(this);
-    }
+    state = {
+        width: document.body.clientWidth,
+        height: document.body.clientHeight,
+        markers: [] // currently showing markers only
+    };
 
     componentWillReceiveProps(nextProps) {
         this.setState({
@@ -73,17 +67,17 @@ export default class MarkerMap extends React.Component {
         }, 0);
     }
 
-    handleZoomStart() {
+    handleZoomStart = () => {
         this.setState({
             markers: []
         });
-    }
+    };
 
-    handleMoveEnd(e) {
+    handleMoveEnd = e => {
         this.setState({
             markers: rearrange(this.props.markers, e.target.getZoom(), e.target.getBounds())
         });
-    }
+    };
 
     render() {
         return <Map

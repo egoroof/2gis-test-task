@@ -4,20 +4,16 @@ import MarkerMap from './MarkerMap.jsx';
 import SearchPanel from './SearchPanel.jsx';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            center: [55.74813, 37.626543],
-            markers: [] // all markers by query
-        };
-        this.handleNewQuery = this.handleNewQuery.bind(this);
-    }
+    state = {
+        center: [55.74813, 37.626543],
+        markers: [] // all markers by query
+    };
 
-    handleNewQuery(markers) {
+    handleNewQuery = markers => {
         this.setState({
             markers: markers
         });
-    }
+    };
 
     render() {
         return <div>
