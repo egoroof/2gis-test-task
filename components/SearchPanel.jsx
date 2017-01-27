@@ -54,8 +54,7 @@ export default class SearchPanel extends React.Component {
             return;
         }
         this.setState({
-            disabled: true,
-            query: ''
+            disabled: true
         });
         this.props.onNewQuery([]);
         request(query).then(markers => {
@@ -70,6 +69,7 @@ export default class SearchPanel extends React.Component {
                 });
                 return {
                     disabled: false,
+                    query: '',
                     queries: prevState.queries
                 };
             });
