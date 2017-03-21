@@ -7,19 +7,19 @@
     "test": "eslint -c tools/.eslintrc.js components/**/*.jsx"
   },
   "devDependencies": {
-    "2gis-maps": "3.2.0",
-    "2gis-maps-react": "0.0.3",
-    "babel-core": "6.23.1",
-    "babel-eslint": "7.1.1",
-    "babel-loader": "6.3.2",
-    "babel-plugin-transform-class-properties": "6.23.0",
-    "babel-preset-env": "1.1.10",
-    "babel-preset-react": "6.23.0",
-    "eslint": "3.16.1",
-    "eslint-plugin-react": "6.10.0",
-    "react": "15.4.2",
-    "react-dom": "15.4.2",
-    "webpack": "2.2.1",
-    "whatwg-fetch": "2.0.2"
+    "2gis-maps": "^3.2.0",
+    "2gis-maps-react": "^0.0.3",
+    "babel-core": "^6.23.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.3.2",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-preset-env": "^1.1.10",
+    "babel-preset-react": "^6.23.0",
+    "eslint": "^3.16.1",
+    "eslint-plugin-react": "^6.10.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "webpack": "^2.2.1",
+    "whatwg-fetch": "^2.0.2"
   }
 }
