@@ -30,7 +30,7 @@ Then open `public/index.html`
 ## If I start this project today
 
 Current project have major problems: super big js bundle size, slow sorting algorithm
-and slow markers painting (as they're DOM elements).
+and slow markers painting (as they're DOM elements). Also it doesn't correctly project geo coordinates to screen coordinates and it won't correctly work on retina display.
 
 - For fast sorting I would use [2gis/general](https://github.com/2gis/general).
 - For fast marker drawing I would use [2gis/markerdrawer](https://github.com/2gis/markerdrawer).
